@@ -2,7 +2,7 @@
   "branches": [
     "main"
   ],
-  "repositoryUrl": "https://github.com/RobertYoung/homelab-ansible-role-telegraf",
+  "repositoryUrl": "https://github.com/iamrobertyoung/homelab-ansible-role-telegraf",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
