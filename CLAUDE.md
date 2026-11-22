@@ -42,8 +42,8 @@ All have defaults in `defaults/main.yml`. Override `telegraf_influxdb_token` wit
 
 ## Architecture
 
-- `tasks/main.yml` - Adds InfluxData repo, installs Telegraf, deploys config/service, optionally adds user to docker group
-- `handlers/main.yml` - Handler chain: stop service → reload systemd → start service (enabled)
+- `tasks/main.yml` - Adds InfluxData repo, installs Telegraf, deploys config/service, adds the telegraf user to the docker group when it exists, flushes handlers, ensures the service is enabled and started
+- `handlers/main.yml` - One restart handler that reloads systemd and restarts the service; no chained handlers, since handler names are global to the play
 - `templates/telegraf.conf.j2` - Telegraf config with conditional docker input plugin
 - `templates/telegraf.service.j2` - Systemd unit file
 - `molecule/default/prepare.yml` - Installs `python3-debian` for `deb822_repository` module

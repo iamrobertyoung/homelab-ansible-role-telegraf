@@ -1,22 +1,8 @@
 ---
+# Handler names are global to the play, so a chain notifying "Reload systemd" would run another role's handler instead.
 - name: "Restart {{ telegraf_service_name }}"
   become: true
-  changed_when: true
   ansible.builtin.systemd:
     name: "{{ telegraf_service_name }}"
-    state: stopped
-  notify: Reload systemd
-
-- name: "Reload systemd"
-  become: true
-  changed_when: true
-  ansible.builtin.systemd:
     daemon_reload: true
-  notify: "Start {{ telegraf_service_name }}"
-
-- name: "Start {{ telegraf_service_name }}"
-  become: true
-  ansible.builtin.systemd:
-    name: "{{ telegraf_service_name }}"
-    enabled: true
-    state: started
+    state: restarted
