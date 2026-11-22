@@ -56,3 +56,10 @@
           - ansible_facts.services['telegraf.service'].status == 'enabled'
         fail_msg: "telegraf service is not enabled"
         success_msg: "telegraf service is enabled"
+
+    - name: Assert telegraf service is running
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services['telegraf.service'].state == 'running'
+        fail_msg: "telegraf service is not running"
+        success_msg: "telegraf service is running"
